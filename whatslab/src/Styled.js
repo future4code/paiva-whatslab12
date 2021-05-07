@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 export const InputUsuario = styled.input`
-    border-radius: 5px;
+    border-radius: 3px;
     border-width: 1px;
     color: grey;
     display: flex;
@@ -14,11 +14,11 @@ export const InputUsuario = styled.input`
 
 export const InputMensagem = styled.input`
     border-width: 1px;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: white;
     color: grey;
     display: flex;
-    width: 13vw;
+    width: 10vw;
     height: 2vh;
     margin: 10px;
 `
@@ -28,9 +28,10 @@ export const Button = styled.button`
     justify-content: center;
     align-items: center;
     background-color: internal-light-dark(black, white);;
+    width: 3vw;
     height: 2.5vh;
     margin: 10px;
-    border-radius: 5px;
+    border-radius: 3px;
 
 `
 
