@@ -1,10 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import {Button} from './Styled';
+import {InputUsuario} from './Styled'; 
+import {InputMensagem} from './Styled'; 
+import {InputContainer} from './Styled';
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <InputContainer className="App">
+      <InputUsuario placeholder="Usuario" />
+      <InputMensagem placeholder="Mensagem" />
+      <Button>Enviar</Button>
+    </InputContainer>
+
   );
 }
 
