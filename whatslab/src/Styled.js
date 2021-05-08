@@ -35,7 +35,7 @@ export const Button = styled.button`
 
 `
 
-export const InputContainer = styled.div`
+export const Container = styled.div`
     background-color: #e5ddd6;
     position: absolute;
     margin-left: 38vw;
