@@ -43,7 +43,22 @@ export const Container = styled.div`
     width: 23vw;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    flex-direction: column-reverse;
+
     border-style: solid;
     border-width: 1px;
+`
+
+export const ContainerButtons = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    position: fixed;
+    bottom: 0;
+`
+
+export const ContainerMessages = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
 `
