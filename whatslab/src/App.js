@@ -5,48 +5,88 @@ import { InputUsuario } from './Styled';
 import { InputMensagem } from './Styled';
 import { Container } from './Styled';
 import React, { Component } from 'react';
+import { ContainerButtons } from './Styled';
+import { ContainerMessages } from './Styled';
 
-class App extends Component {
+
+class App extends React.Component {
   state = {
-    fields: {
-      user: "",
-      message: "",
-    },
-    messages: []
-  }
-  handleChange = (name, value) => {
-    this.setState({ fields: { ...this.state.fields, [name]: value, } })
+    posts: [
+      {
+        remetente: "",
+        conteudo: ""
+      }],
+        novoRemetente: "",
+        novoConteudo: ""
   }
 
-  handleClick = () => {
-    const newMessages = this.state.messages
-    newMessages.push(this.state.fields)
-    this.setState({ messages: newMessages })
+  onChangeInputNovoRemente = event => {
+    this.setState({ novoRemetente: event.target.value })
+  }
 
-    this.setState({
-      fields: {
-        user: "",
-        message: ""
-      }
+  onChangeInputNovoConteudo = event => {
+    this.setState({ novoConteudo: event.target.value })
+  }
+
+  onKeyUpPostarMensagem = event => {
+    if (event.code === "Enter" && this.state.novoRemetente !== "" && this.state.novoConteudo !== "") {
+      this.novaMensagemPostada()
+    }
+  }
+
+  novaMensagemPostada = () => {
+    const novaMensagem = {
+      remetente: this.state.novoRemetente,
+      novoConteudo: this.state.novoConteudo
+    }
+
+  const mensagensAtualizadas = [...this.state.posts, novaMensagem]
+    this.setState({ posts: mensagensAtualizadas })
+    this.setState({ novoRemetente: "", novoConteudo: "" })
+  }
+
+  deletarMensagem = (event) => {
+    let excluir = event.target
+    excluir.remove()
+  }
+
+render() {
+
+    const mensagemsComponentes = this.state.posts.map((post) => {
+      return (
+        <div
+          id={post.remetente} 
+          onDoubleClick={this.deletarMensagem}>
+            <p>{post.remetente}</p>
+            <p>{post.novoConteudo}</p>
+        </div>
+      )
     })
-  }
 
-  render() {
+
     return (
-      <>
-
-        <Container className="App">
-          {this.state.messages.map(message => {
-            return (
-                <h1>{message.user}</h1>,
-                <p>{message.message}</p>
-            )
-          })}
-          <InputUsuario onChange={(e) => this.handleChange("user", e.target.value)} value={this.state.fields.user} type='text' placeholder="Usuario" />
-          <InputMensagem onChange={(e) => this.handleChange("message", e.target.value)} value={this.state.fields.message} type='text' placeholder="Mensagem" />
-          <Button onClick={() => this.handleClick()}>Enviar</Button>
+      <div className="App">
+        <Container>
+        <ContainerMessages>
+        {mensagemsComponentes}
+        </ContainerMessages>
+        <ContainerButtons>
+        <InputUsuario 
+          placeholder="Usuário" 
+          value={this.state.novoRemetente}
+          onChange={this.onChangeInputNovoRemente} 
+          onKeyDown={this.onKeyUpPostarMensagem}
+        />
+        <InputMensagem
+          placeholder="Mensagem" 
+          value={this.state.novoConteudo}
+          onChange={this.onChangeInputNovoConteudo}
+          onKeyDown={this.onKeyUpPostarMensagem} 
+        />
+        <Button onClick={this.novaMensagemPostada}>Enviar</Button>
+        </ContainerButtons>
         </Container>
-      </>
+      </div>
     );
   }
 }
